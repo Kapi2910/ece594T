@@ -8,7 +8,7 @@ l = .1 # length
 h = .0001 # discretization step
 T = 2 # time horizon
 
-# Control policy.
+# Control policy: given the state, returns the control input.
 def pi(x):
     ### YOUR CODE HERE
     ### YOUR CODE HERE
@@ -18,23 +18,26 @@ def pi(x):
 # Closed-loop dynamics.
 def f(x):
     return np.array([
-        x[1],
-        (m * g * l * np.sin(x[0]) + pi(x)) / (m * l ** 2)])
+        x[1], # angular velocity
+        (m * g * l * np.sin(x[0]) + pi(x)) / (m * l ** 2)]) # angular acceleration
 
-# Plot trajectories for different initial angles.
+# Plot trajectories for different initial angles. Usese explicit Euler for the
+# simulation.
 plt.figure()
-K = int(T / h)
-traj = np.zeros((K, 2))
-initial_angles = np.pi * np.arange(6) / 5
-for theta_0 in initial_angles:
-    traj[0] = [theta_0, 0]
+K = int(T / h) # time steps in discrete-time simulation
+traj = np.zeros((K, 2)) # matrix of states
+for q0 in np.pi * np.arange(6) / 5: # loop through multiple initial angles
+    traj[0] = [q0, 0] # set initial state
     for k in range(K - 1):
-        traj[k + 1] = traj[k] + h * f(traj[k])
-    plt.plot(traj[:,0], traj[:,1], label=fr'$\theta_0={np.round(theta_0, 2)}$')
+        traj[k + 1] = traj[k] + h * f(traj[k]) # explicit Euler
+    plt.plot(
+        traj[:,0], # angle
+        traj[:,1], # angular velocity
+        label=fr'$q_0={np.round(q0, 2)}$')
 
 # Plot options.
-plt.xlabel(r'$\theta$')
-plt.ylabel(r'$\dot \theta$')
+plt.xlabel(r'Angle $q$')
+plt.ylabel(r'Angular velocity $\dot q$')
 plt.title('Pendulum trajectories')
 plt.legend()
 plt.grid()
