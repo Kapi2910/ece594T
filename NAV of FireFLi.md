@@ -1,0 +1,12 @@
+- Networking between jetson and turtlebot
+- A* for path planning
+- A* vs RRT??
+- how are we binarizing the SLAM map
+- what is the SLAM algo
+	- SLAM is not NAV2
+	- Order of Execution: RViz, SLAM, NAV2
+- NAV2 bond timer??
+- Map stability
+- What is the origin point for the turtle bot??
+- when does the map size increase from the MIN_FREE_CELLS
+- what do the cell numbers in the map refer too
