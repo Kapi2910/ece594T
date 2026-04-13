@@ -46,7 +46,7 @@ $$
 Then I calculate the residual from the current position as $e(t) = 2k\pi - q_0(t)$.
 Finally, the control policy $$u(t) = K_p e(t) + K_d \dot e(t)$$ where $K_p$ and $K_d$ are the proportional and derivative gains which drive the system to the desired equilibrium state.
 
-# Question 1.4
+# # Question 1.4
 Given the following for the planar quadrotor
 $$
 \begin{align}
@@ -61,6 +61,8 @@ $$
 \end{align*}
 $$
 Therefore $q_1(t)$ has **zero acceleration** at the initial and final locations
+
+
 (b)  We first take the time derivative of eq. 1.20 from the text
 $$
 \begin{align*}
@@ -77,6 +79,39 @@ $$
 \end{align*}
 $$
 Therefore $q_1(t)$ has **zero jerk** at the initial and final locations
+
+(c) To find the functions $q_1, q_2$ I assumed them to be an polynomial of degree 8. This can be written as $q(t) = \sum\limits_{n = 0}^8 a_nt^n$. Here I have dropped the subscript because the procedure is same for both the variables.
+If we tabulate the derivatives along with their initial and final conditions:
+
+| $q \in  \set{q_1, q_2}$                                     | $t = 0$ | $t = T$ |
+| ----------------------------------------------------------- | ------- | ------- |
+| $q(t) = \sum\limits_{n = 0}^7 a_nt^n$                       | 0       | 1       |
+| $\dot q(t) = \sum\limits_{n = 1}^7 na_nt^{n-1}$             | 0       | 0       |
+| $\ddot q(t) = \sum\limits_{n = 2}^7 n(n-1)a_nt^{n-2}$       | 0       | 0       |
+| $\dddot q(t) = \sum\limits_{n = 3}^7 n(n-1)(n-2)a_nt^{n-3}$ | 0       | 0       |
+
+If we define the following  $$
+\begin{align}
+\textbf a &= \begin{bmatrix}a_0 & a_1 &\cdots & a_7\end{bmatrix}^\top \text{ coefficient vector},\\ \textbf e &= \begin{bmatrix}q(0)& \dot q(0)& \ddot q(0)& \dddot q(0)& q(T)& \dot q(T)& \ddot q(T)& \dddot q(T)\end{bmatrix}^\top \text{ vector containing the initial and final conditions}\\
+\textbf{Q} &= \begin{bmatrix}
+\alpha(0)&\dot \alpha(0)&\ddot \alpha(0)&\dddot \alpha(0)&
+\alpha(T)&\dot \alpha(T)&\ddot \alpha(T)&\dddot \alpha(T)
+\end{bmatrix}^\top; \alpha(t) = [1, t, t^2 \cdots t^7]
+\end{align}
+$$
+Then our problems can be expressed as a system of linear equations
+$$
+\textbf{Qa} = \textbf{e}
+$$
+which can then be solved to get the coefficients  
+
+Solving this system for the values tabulated above yields the following polynomial:
+$$
+q_1(t) = q_2(t) = 2.19t^4-2.63t^5+1.09t^6-0.16t^7
+$$
+
+
+
 
 
 
