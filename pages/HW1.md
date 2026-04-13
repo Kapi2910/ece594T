@@ -35,6 +35,49 @@ Taking the limit, $\lim\limits_{k \rightarrow \infty}|\tilde \varphi(k;x_0)| = \
 
 Hence for the for $f(x) = -x;\ h=2.5$ the continuous-time solution converges for all initial conditions whereas the discrete-time solution diverges for all non-zero initial conditions
 
+# Question 1.3
+
+(a) I am implementing the time-invariant control policy as a function of the residual between the equilibrium state and current angle. 
+
+For this, I first find nearest closest integer multiple to $2\pi$ as follows 
+$$
+k = \text{round}\Big(\frac{q_0(t)}{2\pi} \Big)
+$$
+Then I calculate the residual from the current position as $e(t) = 2k\pi - q_0(t)$.
+Finally, the control policy $$u(t) = K_p e(t) + K_d \dot e(t)$$ where $K_p$ and $K_d$ are the proportional and derivative gains which drive the system to the desired equilibrium state.
+
+# Question 1.4
+Given the following for the planar quadrotor
+$$
+\begin{align}
+& \frac{\ddot q_1(t)}{\ddot q_(t) + g} = -\tan(q_3(t))  
+\end{align}
+$$
+(a) Given $q_3(0) = q_3(T) = 0$, then this implies that when $t \in \set{0,T}$
+$$
+\begin{align*}
+\frac{\ddot q_1(t)}{\ddot q_(t) + g} &= 0, (\text{ as} \tan(t) = 0)\\
+\implies \ddot q_1(t) &= 0, (\text{ as denominator cannot be zero})
+\end{align*}
+$$
+Therefore $q_1(t)$ has **zero acceleration** at the initial and final locations
+(b)  We first take the time derivative of eq. 1.20 from the text
+$$
+\begin{align*}
+\frac{d}{dt}\Big(\frac{\ddot q_1(t)}{\ddot q_(t) + g} &= -\tan(q_3(t))\Big) \\
+\frac{\dddot q_1(t)}{\ddot q_(t) + g} + \Big(\frac{-\ddot q_1(t)}{\ddot q_(t) + g}\Big)\cdot\frac{\dddot q_2(t)}{\ddot q_(t) + g} &= -\dot q_3(t)(1+\tan^2(q_3(t))) \\
+\frac{\dddot q_1(t)}{\ddot q_(t) + g} + \Big(\tan(q_3(t))\Big)\cdot\frac{\dddot q_2(t)}{\ddot q_(t) + g} &= -\dot q_3(t)(1+\tan^2(q_3(t))) \\
+\end{align*}
+$$
+Given $\dot q_3(0) = \dot q_3(T) = 0$, then this implies that when $t \in \set{0,T}$
+$$
+\begin{align*}
+\frac{\dddot q_1(t)}{\ddot q_(t) + g} + 0\cdot\frac{\dddot q_2(t)}{\ddot q_(t) + g} &= 0 , (\text{ as} \tan(t) = 0)\\
+\implies \dddot q_1(t) &= 0, (\text{ as denominator cannot be zero})
+\end{align*}
+$$
+Therefore $q_1(t)$ has **zero jerk** at the initial and final locations
+
 
 
 
