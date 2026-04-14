@@ -214,3 +214,18 @@ __marimo__/
 
 # Data
 *.npy
+.obsidian
+# Logseq auto‑generated / cache folders
+logseq/bak
+logseq/.recycle
+logseq/graphs/**/.recycle
+
+# Syncthing artifacts (if you use Syncthing)
+.stfolder/
+.stignore
+
+# Temp files
+*.tmp
+
+# System / editor files
+.DS_Store
