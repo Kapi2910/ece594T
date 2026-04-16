@@ -1,3 +1,18 @@
+.obsidian
+# Logseq auto‑generated / cache folders
+logseq/bak
+logseq/.recycle
+logseq/graphs/**/.recycle
+
+# Syncthing artifacts (if you use Syncthing)
+.stfolder/
+.stignore
+
+# Temp files
+*.tmp
+
+# System / editor files
+.DS_Store
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -206,8 +221,6 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Mac
-.DS_Store
 
 # Plots
 *.pdf
